@@ -8,9 +8,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js",
-    "lint": "eslint src --ext .ts --fix",
-    "build": "tsup src --out-dir build",
-    "test": "vitest"
+    "lint": "eslint src --ext .ts --fix"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +19,6 @@
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
     "knex": "^3.1.0",
-    "pg": "^8.13.3",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -31,9 +28,7 @@
     "eslint": "^8.57.1",
     "sqlite3": "^5.1.7",
     "supertest": "^7.0.0",
-    "tsup": "^8.3.6",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.5"
+    "typescript": "^5.7.3"
   }
 }
