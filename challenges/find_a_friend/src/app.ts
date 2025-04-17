@@ -3,18 +3,16 @@ import fastifyCookie from '@fastify/cookie'
 import { ZodError } from 'zod'
 import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
+import fastifyCors from 'fastify-cors'
 
 export const app = fastify()
 
+app.register(fastifyCors, {
+  origin: '*',
+})
+
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
-  cookie: {
-    cookieName: 'refreshToken',
-    signed: false,
-  },
-  sign: {
-    expiresIn: '10m',
-  },
 })
 
 app.register(fastifyCookie)
@@ -29,8 +27,6 @@ app.setErrorHandler((error, _, reply) => {
 
   if (env.NODE_ENV !== 'production') {
     console.error(error)
-  } else {
-    // TODO: Here we should log to an external tool DataDog/NewRelic/Sentry
   }
 
   return reply.status(500).send({ message: 'Internal server error.' })
