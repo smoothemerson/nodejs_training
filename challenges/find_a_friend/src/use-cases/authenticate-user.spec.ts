@@ -35,7 +35,7 @@ describe('Authenticate User Use Case', () => {
       password_hash: await hash('123456', 6),
     })
 
-    expect(async () => {
+    await expect(async () => {
       await sut.execute({
         email: 'jonhdoe@example.com',
         password: '123123',
@@ -44,7 +44,7 @@ describe('Authenticate User Use Case', () => {
   })
 
   it('should not be able to authenticate with a non-existent user', async () => {
-    expect(async () => {
+    await expect(async () => {
       await sut.execute({
         email: 'jonhdoe@example.com',
         password: '123456',
