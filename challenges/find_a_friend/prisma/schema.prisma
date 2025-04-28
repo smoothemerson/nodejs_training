@@ -67,7 +67,7 @@ model Pet {
   city         String
   neighborhood String
   road         String
-  number       String
+  phone        String
   name         String
   description  String
   age          Int
@@ -77,8 +77,8 @@ model Pet {
   environment  Environment
   created_at   DateTime          @default(now())
 
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  organizationId String
+  organization    Organization @relation(fields: [organization_id], references: [id])
+  organization_id String
 
   @@map("pets")
 }

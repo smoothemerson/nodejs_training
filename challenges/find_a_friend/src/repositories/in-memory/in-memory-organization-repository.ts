@@ -5,9 +5,7 @@ import type { Organization, Prisma } from '@prisma/client'
 export class InMemoryOrganizationRepository implements OrganizationRepository {
   public items: Organization[] = []
 
-  public async create(
-    data: Prisma.OrganizationCreateInput,
-  ): Promise<Organization> {
+  async create(data: Prisma.OrganizationCreateInput) {
     const organization = {
       id: randomUUID(),
       name: data.name,
@@ -24,8 +22,18 @@ export class InMemoryOrganizationRepository implements OrganizationRepository {
     return organization
   }
 
-  public async findByEmail(email: string): Promise<Organization | null> {
+  async findByEmail(email: string) {
     const organization = this.items.find((item) => item.email === email)
+
+    if (!organization) {
+      return null
+    }
+
+    return organization
+  }
+
+  async findById(id: string) {
+    const organization = this.items.find((item) => item.id === id)
 
     if (!organization) {
       return null

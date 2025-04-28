@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto'
 export class InMemoryUsersRepository implements UsersRepository {
   public itens: User[] = []
 
-  public async create(data: Prisma.UserCreateInput): Promise<User> {
+  async create(data: Prisma.UserCreateInput) {
     const user = {
       id: randomUUID(),
       name: data.name,
@@ -19,7 +19,7 @@ export class InMemoryUsersRepository implements UsersRepository {
     return user
   }
 
-  public async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string) {
     const user = this.itens.find((item) => item.email === email)
 
     if (!user) {
