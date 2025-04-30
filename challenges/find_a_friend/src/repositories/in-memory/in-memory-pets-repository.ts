@@ -28,4 +28,12 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     return pet
   }
+
+  async delete(id: string) {
+    const pet = this.itens.find((item) => item.id === id)
+
+    if (!pet) return null
+
+    return pet
+  }
 }
