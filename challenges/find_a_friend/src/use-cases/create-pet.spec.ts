@@ -53,7 +53,7 @@ describe('Create Pet Use Case', () => {
         road: 'Avenida Brasil',
         phone: '31987654321',
         name: 'Luna',
-        description: 'Luna é uma gata dócil e carinhosa...',
+        description: 'Luna é uma gata dócil e carinhosa',
         age: 2,
         size: 'SMALL',
         energy_level: 'LOW',
