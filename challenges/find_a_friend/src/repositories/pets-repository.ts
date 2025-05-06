@@ -1,7 +1,25 @@
-import type { Pet, Prisma } from '@prisma/client'
+import type {
+  EnergyLevel,
+  Environment,
+  IndependenceLevel,
+  Pet,
+  Prisma,
+  Size,
+} from '@prisma/client'
 
 export interface PetsRepository {
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
   findByCity(city: string): Promise<Pet[]>
+  filterPets(
+    city?: string,
+    neighborhood?: string,
+    name?: string,
+    age?: number,
+    size?: Size,
+    energyLevel?: EnergyLevel,
+    independenceLevel?: IndependenceLevel,
+    environment?: Environment,
+  ): Promise<Pet[]>
+
   delete(id: string): Promise<Pet | null>
 }

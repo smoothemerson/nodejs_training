@@ -29,10 +29,27 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  public findByCity(city: string): Promise<Pet[]> {
+  async findByCity(city: string): Promise<Pet[]> {
     const pets = this.itens.filter((item) => item.city === city)
 
     return Promise.resolve(pets)
+  }
+
+  async filterPets(
+    city?: string,
+    neighborhood?: string,
+    name?: string,
+    age?: number,
+  ): Promise<Pet[]> {
+    const pets = this.itens.filter(
+      (item) =>
+        item.city === city ||
+        item.neighborhood === neighborhood ||
+        item.name === name ||
+        item.age === age,
+    )
+
+    return pets
   }
 
   async delete(id: string) {
