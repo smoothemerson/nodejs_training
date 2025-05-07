@@ -35,6 +35,16 @@ export class InMemoryPetsRepository implements PetsRepository {
     return Promise.resolve(pets)
   }
 
+  async getPetDetails(id: string): Promise<Pet | null> {
+    const pet = this.itens.find((item) => item.id === id)
+
+    if (!pet) {
+      return null
+    }
+
+    return pet
+  }
+
   async filterPets(
     city?: string,
     neighborhood?: string,

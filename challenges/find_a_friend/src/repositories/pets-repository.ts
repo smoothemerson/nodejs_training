@@ -10,6 +10,7 @@ import type {
 export interface PetsRepository {
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
   findByCity(city: string): Promise<Pet[]>
+  getPetDetails(id: string): Promise<Pet | null>
   filterPets(
     city?: string,
     neighborhood?: string,
