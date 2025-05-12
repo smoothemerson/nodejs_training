@@ -3,12 +3,14 @@ import fastifyCookie from '@fastify/cookie'
 import { ZodError } from 'zod'
 import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
-import fastifyCors from 'fastify-cors'
+import fastifyCors from '@fastify/cors'
+import { petsRoutes } from './http/controllers/pets/routes'
+import { organizationRoutes } from './http/controllers/organizations/routes'
 
 export const app = fastify()
 
 app.register(fastifyCors, {
-  origin: '*',
+  origin: true,
 })
 
 app.register(fastifyJwt, {
@@ -16,6 +18,8 @@ app.register(fastifyJwt, {
 })
 
 app.register(fastifyCookie)
+app.register(organizationRoutes)
+app.register(petsRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
