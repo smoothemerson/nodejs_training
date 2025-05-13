@@ -1,11 +1,9 @@
-import { PrismaOrganizationRepository } from '@/repositories/prisma/prisma-organization-repository'
 import { PrismaPetsRepository } from '@/repositories/prisma/prisma-pets-repository'
-import { CreatePetUseCase } from '../create-pet'
+import { DeletePetUseCase } from '../delete-pet'
 
-export function makeCreatePetUseCase() {
+export function makeDeletePetUseCase() {
   const petsRepository = new PrismaPetsRepository()
-  const organizationRepository = new PrismaOrganizationRepository()
-  const useCase = new CreatePetUseCase(petsRepository, organizationRepository)
+  const useCase = new DeletePetUseCase(petsRepository)
 
   return useCase
 }
