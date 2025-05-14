@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 
 function generateDatabaseURL(schema: string) {
   if (!process.env.DATABASE_URL) {
-    throw new Error('Please provided a DATABASE_URL environment variable')
+    throw new Error('Please provided a DATABASE_URL env variable')
   }
 
   const url = new URL(process.env.DATABASE_URL)
@@ -20,6 +20,7 @@ function generateDatabaseURL(schema: string) {
 
 export default <Environment>{
   name: 'prisma',
+  transformMode: 'ssr',
   async setup() {
     const schema = randomUUID()
     const databaseURL = generateDatabaseURL(schema)
@@ -37,5 +38,4 @@ export default <Environment>{
       },
     }
   },
-  transformMode: 'ssr',
 }
