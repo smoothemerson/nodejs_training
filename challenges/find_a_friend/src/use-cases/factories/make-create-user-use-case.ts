@@ -1,11 +1,9 @@
-import { PrismaOrganizationRepository } from '@/repositories/prisma/prisma-organization-repository'
-import { PrismaPetsRepository } from '@/repositories/prisma/prisma-pets-repository'
-import { CreatePetUseCase } from '../create-pet'
+import { PrismaUserRepository } from '@/repositories/prisma/prisma-user-repository'
+import { CreateUserUseCase } from '../create-user'
 
-export function makeCreatePetUseCase() {
-  const petsRepository = new PrismaPetsRepository()
-  const organizationRepository = new PrismaOrganizationRepository()
-  const useCase = new CreatePetUseCase(petsRepository, organizationRepository)
+export function makeCreateUserUseCase() {
+  const usersRepository = new PrismaUserRepository()
+  const useCase = new CreateUserUseCase(usersRepository)
 
   return useCase
 }
