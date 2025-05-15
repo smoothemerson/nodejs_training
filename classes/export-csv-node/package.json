@@ -1,0 +1,22 @@
+{
+  "name": "export-csv-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "lint": "biome check --write ./src",
+    "format": "biome format --write ."
+  },
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@faker-js/faker": "9.8.0",
+    "@types/node": "22.15.18",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "csv-stringify": "6.5.2",
+    "postgres": "3.4.5"
+  }
+}
