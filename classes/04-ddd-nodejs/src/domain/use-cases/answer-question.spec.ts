@@ -4,7 +4,7 @@ import { AnswerQuestionUseCase } from './answer-question'
 
 const fakeAnswerRepository: AnswersRepository = {
   create: async (answer: Answer) => {
-    return
+    console.log(answer)
   },
 }
 
