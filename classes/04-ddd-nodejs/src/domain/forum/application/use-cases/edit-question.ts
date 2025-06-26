@@ -13,7 +13,7 @@ interface EditQuestionUseCaseRequest {
   questionId: string
   title: string
   content: string
-  attachmentIds: string[]
+  attachmentsIds: string[]
 }
 
 type EditQuestionUseCaseResponse = Either<
@@ -26,7 +26,7 @@ type EditQuestionUseCaseResponse = Either<
 export class EditQuestionUseCase {
   constructor(
     private questionsRepository: QuestionsRepository,
-    private questionAttachementsRepository: QuestionAttachmentsRepository,
+    private questionAttachmentsRepository: QuestionAttachmentsRepository,
   ) {}
 
   async execute({
@@ -34,7 +34,7 @@ export class EditQuestionUseCase {
     questionId,
     title,
     content,
-    attachmentIds,
+    attachmentsIds,
   }: EditQuestionUseCaseRequest): Promise<EditQuestionUseCaseResponse> {
     const question = await this.questionsRepository.findById(questionId)
 
@@ -47,12 +47,12 @@ export class EditQuestionUseCase {
     }
 
     const currentQuestionAttachments =
-      await this.questionAttachementsRepository.findManyByQuestionId(questionId)
+      await this.questionAttachmentsRepository.findManyByQuestionId(questionId)
     const questionAttachmentList = new QuestionAttachmentList(
       currentQuestionAttachments,
     )
 
-    const questionAttachments = attachmentIds.map((attachmentId) => {
+    const questionAttachments = attachmentsIds.map((attachmentId) => {
       return QuestionAttachment.create({
         attachmentId: new UniqueEntityID(attachmentId),
         questionId: question.id,
@@ -61,9 +61,9 @@ export class EditQuestionUseCase {
 
     questionAttachmentList.update(questionAttachments)
 
+    question.attachments = questionAttachmentList
     question.title = title
     question.content = content
-    question.attachments = questionAttachmentList
 
     await this.questionsRepository.save(question)
 

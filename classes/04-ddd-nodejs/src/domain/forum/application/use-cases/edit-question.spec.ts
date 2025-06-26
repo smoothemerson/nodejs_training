@@ -12,9 +12,11 @@ let sut: EditQuestionUseCase
 
 describe('Edit Question', () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentsRepository,
+    )
     sut = new EditQuestionUseCase(
       inMemoryQuestionsRepository,
       inMemoryQuestionAttachmentsRepository,
@@ -47,7 +49,7 @@ describe('Edit Question', () => {
       authorId: 'author-1',
       title: 'Pergunta teste',
       content: 'Conteúdo teste',
-      attachmentIds: ['1', '3'],
+      attachmentsIds: ['1', '3'],
     })
 
     expect(inMemoryQuestionsRepository.items[0]).toMatchObject({
@@ -85,7 +87,7 @@ describe('Edit Question', () => {
       authorId: 'author-2',
       title: 'Pergunta teste',
       content: 'Conteúdo teste',
-      attachmentIds: [],
+      attachmentsIds: [],
     })
 
     expect(result.ifLeft()).toBe(true)
