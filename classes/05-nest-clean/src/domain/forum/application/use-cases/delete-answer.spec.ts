@@ -1,10 +1,10 @@
-import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { makeAnswer } from 'test/factories/make-answer'
-import { DeleteAnswerUseCase } from './delete-answer'
+import { makeAnswerAttachment } from 'test/factories/make-answer-attachment'
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
-import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
-import { makeAnswerAttachment } from 'test/factories/make-answer-attachment'
+import { DeleteAnswerUseCase } from './delete-answer'
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
@@ -15,7 +15,7 @@ describe('Delete Answer', () => {
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
-      inMemoryAnswerAttachmentsRepository,
+      inMemoryAnswerAttachmentsRepository
     )
     sut = new DeleteAnswerUseCase(inMemoryAnswersRepository)
   })
@@ -25,7 +25,7 @@ describe('Delete Answer', () => {
       {
         authorId: new UniqueEntityID('author-1'),
       },
-      new UniqueEntityID('answer-1'),
+      new UniqueEntityID('answer-1')
     )
 
     await inMemoryAnswersRepository.create(newAnswer)
@@ -38,7 +38,7 @@ describe('Delete Answer', () => {
       makeAnswerAttachment({
         answerId: newAnswer.id,
         attachmentId: new UniqueEntityID('2'),
-      }),
+      })
     )
 
     await sut.execute({
@@ -55,7 +55,7 @@ describe('Delete Answer', () => {
       {
         authorId: new UniqueEntityID('author-1'),
       },
-      new UniqueEntityID('answer-1'),
+      new UniqueEntityID('answer-1')
     )
 
     await inMemoryAnswersRepository.create(newAnswer)
@@ -65,7 +65,7 @@ describe('Delete Answer', () => {
       answerId: 'answer-1',
     })
 
-    expect(result.ifLeft()).toBe(true)
+    expect(result.isLeft()).toBe(true)
     expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

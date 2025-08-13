@@ -1,8 +1,8 @@
-import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-repository'
-import { ReadNotificationUseCase } from './read-notification'
 import { makeNotification } from 'test/factories/make-notification'
+import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-repository'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
+import { ReadNotificationUseCase } from './read-notification'
 
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository
 let sut: ReadNotificationUseCase
@@ -25,7 +25,7 @@ describe('Read Notification', () => {
 
     expect(result.isRight()).toBe(true)
     expect(inMemoryNotificationsRepository.items[0].readAt).toEqual(
-      expect.any(Date),
+      expect.any(Date)
     )
   })
 
@@ -41,7 +41,7 @@ describe('Read Notification', () => {
       recipientId: 'recipient-2',
     })
 
-    expect(result.ifLeft()).toBe(true)
+    expect(result.isLeft()).toBe(true)
     expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

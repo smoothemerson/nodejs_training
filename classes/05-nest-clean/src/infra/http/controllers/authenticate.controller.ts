@@ -24,7 +24,7 @@ export class AuthenticateController {
       password,
     })
 
-    if (result.ifLeft()) {
+    if (result.isLeft()) {
       throw new Error()
     }
 
