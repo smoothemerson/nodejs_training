@@ -1,4 +1,4 @@
-import { Prisma, User as PrismaUser } from '@/../generated/prisma'
+import { Prisma, User as PrismaUser } from '@prisma/client'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Student } from '@/domain/forum/enterprise/entities/student'
 

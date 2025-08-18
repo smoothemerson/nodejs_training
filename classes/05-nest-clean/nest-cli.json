@@ -4,13 +4,6 @@
   "sourceRoot": "src",
   "entryFile": "infra/main",
   "compilerOptions": {
-    "deleteOutDir": true,
-    "assets": [
-      {
-        "include": "../generated/prisma",
-        "outDir": "dist/generated",
-        "watchAssets": true
-      }
-    ]
+    "deleteOutDir": true
   }
 }
