@@ -1,8 +1,8 @@
-import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
-import { FetchQuestionAnswersUseCase } from './fetch-question-answers'
 import { makeAnswer } from 'test/factories/make-answer'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { FetchQuestionAnswersUseCase } from './fetch-question-answers'
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
@@ -13,7 +13,7 @@ describe('Fetch Question Answers', () => {
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
-      inMemoryAnswerAttachmentsRepository,
+      inMemoryAnswerAttachmentsRepository
     )
     sut = new FetchQuestionAnswersUseCase(inMemoryAnswersRepository)
   })
@@ -22,19 +22,19 @@ describe('Fetch Question Answers', () => {
     await inMemoryAnswersRepository.create(
       makeAnswer({
         questionId: new UniqueEntityID('question-1'),
-      }),
+      })
     )
 
     await inMemoryAnswersRepository.create(
       makeAnswer({
         questionId: new UniqueEntityID('question-1'),
-      }),
+      })
     )
 
     await inMemoryAnswersRepository.create(
       makeAnswer({
         questionId: new UniqueEntityID('question-1'),
-      }),
+      })
     )
 
     const result = await sut.execute({
@@ -50,7 +50,7 @@ describe('Fetch Question Answers', () => {
       await inMemoryAnswersRepository.create(
         makeAnswer({
           questionId: new UniqueEntityID('question-1'),
-        }),
+        })
       )
     }
 
